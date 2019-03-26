@@ -158,7 +158,6 @@ namespace ConsoleApp1
                 arr[j + 1] = value;
             }
             return shiftCount;
-
         }
     }
 
