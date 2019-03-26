@@ -9,7 +9,7 @@ namespace ConsoleApp1
     class Solution
     {
         // Complete the sockMerchant function below.
-        static int sockMerchant(int n, int[] ar)
+        private static int sockMerchant(int n, int[] ar)
         {
             var toReturn = 0;
             var list = new List<int>();
@@ -30,7 +30,7 @@ namespace ConsoleApp1
         }
 
         // add array together
-        static int simpleArraySum(int[] ar)
+        private static int simpleArraySum(int[] ar)
         {
             var toReturn = 0;
             for (var i = 0; i < ar.Length; i++)
@@ -42,7 +42,7 @@ namespace ConsoleApp1
         }
 
         // Complete the compareTriplets function below.
-        static List<int> compareTriplets(List<int> a, List<int> b)
+        private static List<int> compareTriplets(List<int> a, List<int> b)
         {
             var bob = 0;
             var alice = 0;
@@ -62,7 +62,7 @@ namespace ConsoleApp1
         }
 
         // Complete the aVeryBigSum function below.
-        static long aVeryBigSum(long[] ar)
+        private static long aVeryBigSum(long[] ar)
         {
             long toReturn = 0;
             for (var i = 0; i < ar.Length; i++)
@@ -75,7 +75,7 @@ namespace ConsoleApp1
         }
 
         // Complete the diagonalDifference function below.
-        static int diagonalDifference(int[][] arr)
+        private static int diagonalDifference(int[][] arr)
         {
             var first = 0;
             var second = 0;
@@ -93,15 +93,110 @@ namespace ConsoleApp1
             return Math.Abs(first - second);
         }
 
+        //Plus Minus (algorithm) problem
+        private static void plusMinusProblem(int[] arr)
+        {
+            var positiveNumbers = 0;
+            var negativeNumbers = 0;
+            var zeroNumbers = 0;
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > 0)
+                    ++positiveNumbers;
+                else if (arr[i] < 0)
+                    ++negativeNumbers;
+                else
+                    ++zeroNumbers;
+            }
+
+            Console.WriteLine((double)positiveNumbers / arr.Length);
+            Console.WriteLine((double)negativeNumbers / arr.Length);
+            Console.WriteLine((double)zeroNumbers / arr.Length);
+        }
+
+        // Staircase problem
+        private static void staircaseProblem(int n)
+        {
+            for (var i = 1; i <= n; i++)
+            {
+                var spaces = new string(' ', n - i);
+                var hashes = new string('#', i);
+                Console.WriteLine(spaces + hashes);
+            }
+        }
+
+        //Mini-Max Sum problem
+        private static void mini_maxProblem(int[] numbers)
+        {
+            var sumOfAllNumbers = 0L;
+            var minimum = long.MaxValue;
+            var maximum = 0L;
+            for (var i = 0; i < 5; i++)
+            {
+                sumOfAllNumbers += numbers[i];
+                if (numbers[i] < minimum)
+                    minimum = numbers[i];
+
+                if (numbers[i] > maximum)
+                    maximum = numbers[i];
+
+            }
+            Console.WriteLine($"{sumOfAllNumbers - maximum} {sumOfAllNumbers - minimum}");
+        }
+
+        private static string timeConversion(string time)
+        {
+            var amOrPm = time.Substring(8);
+            var hourComponent = time.Substring(0, 2);
+            var remainingTimeComponent = time.Substring(2, 6);
+            if (amOrPm == "AM" && hourComponent == "12")
+            {
+                hourComponent = "00";
+            }
+            else if (amOrPm == "PM")
+            {
+                var numericHourComponent = int.Parse(hourComponent);
+                if (numericHourComponent != 12)
+                {
+                    hourComponent = Convert.ToString(12 + numericHourComponent);
+                }
+            }
+
+            return hourComponent + remainingTimeComponent;
+        }
+
+        // Birthday cake candles problem
+        private static int birthdayCakeCandles(int[] ar)
+        {
+            var maxValue = ar[0];
+            var maxValueOccurence = 1;
+
+            for (int i = 1; i < ar.Length; i++)
+            {
+                if (ar[i] == maxValue)
+                {
+                    maxValueOccurence++;
+                    continue;
+                }
+                if (ar[i] > maxValue)
+                {
+                    maxValue = ar[i];
+                    maxValueOccurence = 1;
+                }
+            }
+            return maxValueOccurence;
+        }
+
         static void Main(string[] args)
         {
 
-            /*var n = Convert.ToInt32(Console.ReadLine());
+            var n = Convert.ToInt32(Console.ReadLine());
 
             var array = Console.ReadLine().TrimEnd();
             var ar = Array.ConvertAll(array.Split(' '), int.Parse);
 
-            var result = sockMerchant(n, ar);*/
+            /*var result = sockMerchant(n, ar);*/
 
             /*var a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
 
@@ -109,16 +204,16 @@ namespace ConsoleApp1
 
             var result = compareTriplets(a, b);*/
 
-            var n = Convert.ToInt32(Console.ReadLine());
+            /*var n = Convert.ToInt32(Console.ReadLine());
             var arr = new int[n][];
             for (var i = 0; i < n; i++)
             {
                 arr[i] = Array.ConvertAll(Console.ReadLine().Split(' '), Convert.ToInt32);
-            }
+            }*/
 
-            var result = diagonalDifference(arr);
+            plusMinusProblem(ar);
 
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             //Console.WriteLine(string.Join(" ", result));
             Console.ReadLine();
         }
