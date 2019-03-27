@@ -179,4 +179,58 @@ namespace ConsoleApp1
             return x[i].CompareTo(y[i]);
         }
     }
+
+    internal class ArrayProblem
+    {
+        // Array Hourglass problem
+        public static int hourglassSum(int[][] arr)
+        {
+
+            var maxSum = 0;
+            for (var i = 0; i < 6; i++)
+            {
+                for (var j = 0; j < 6; j++)
+                {
+                    var tempSum = 0;
+
+                    //locate the starting index of each hour glass to work
+                    if (i >= 4 || j >= 4)
+                    {
+                        continue;
+                    }
+
+                    //create temp sum of current hour glass
+                    var tempI = i;
+                    var tempJ = j;
+                    tempSum += arr[tempI][tempJ];
+                    tempJ++;
+                    tempSum += arr[tempI][tempJ];
+                    tempJ++;
+                    tempSum += arr[tempI][tempJ];
+                    tempI++; tempJ--;
+                    tempSum += arr[tempI][tempJ];
+                    tempI++; tempJ--;
+                    tempSum += arr[tempI][tempJ];
+                    tempJ++;
+                    tempSum += arr[tempI][tempJ];
+                    tempJ++;
+                    tempSum += arr[tempI][tempJ];
+                    if (i == 0 && j == 0)
+                        maxSum = tempSum;
+                    else if (tempSum > maxSum)
+                    {
+                        maxSum = tempSum;
+                    }
+                }
+            }
+            return maxSum;
+        }
+
+        // Complete the reverseArray function below.
+        public static int[] reverseArray(int[] a)
+        {
+             Array.Reverse(a);
+             return a;
+        }
+    }
 }
